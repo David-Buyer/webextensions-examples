@@ -1,0 +1,43 @@
+{
+  "browser_action": {
+    "browser_style": true,
+    "default_title": "WebRTC Example",
+    //"default_popup": "webrtc.html",
+    "default_icon": {
+      "19": "icons/window19.png",
+      "38": "icons/window38.png"
+    }
+  },
+  "icons": {
+    "48": "icons/window.png",
+    "96": "icons/window@2x.png"
+  },
+  "description": "A WebRTC example.",
+  "homepage_url": "https://github.com/mdn/webextensions-examples/tree/master/window-manipulator",
+  "manifest_version": 2,
+  "name": "WebRTC Example",
+  "version": "1.0",
+  "background": {
+    "scripts": [ "background-service.js" ]
+  },
+  "content_scripts": [
+    //{
+    //  "matches": [ "file:///*/main.html" ],
+    //  "run_at": "document_start",
+    //  "all_frames": true,
+    //  "js": [ "content-script.js" ]
+    //},
+    {
+      "matches": [ "*://*.realbridge.online/*" ],
+      "run_at": "document_start",
+      "all_frames": true,
+      "js": [ "content-injection-script.js" ]
+    }
+  ],
+  "externally_connectable": {
+    "ids": [ "*" ],
+    "matches": [ "*://*.realbridge.online/*" ]
+  },
+  "web_accessible_resources": [ "socket-wrapper.js" ],
+  "permissions": [ "activeTab", "proxy", "storage", "<all_urls>", "tabs" ]
+}
